@@ -2,6 +2,7 @@
 using eShop.Basket.API.Repositories;
 using eShop.Basket.API.IntegrationEvents.EventHandling;
 using eShop.Basket.API.IntegrationEvents.EventHandling.Events;
+using EventBusRabbitMQ;
 
 namespace eShop.Basket.API.Extensions;
 
@@ -15,9 +16,9 @@ public static class Extensions
 
         builder.Services.AddSingleton<IBasketRepository, RedisBasketRepository>();
 
-        builder.AddRabbitMqEventBus("eventbus")
-               .AddSubscription<OrderStartedIntegrationEvent, OrderStartedIntegrationEventHandler>()
-               .ConfigureJsonOptions(options => options.TypeInfoResolverChain.Add(IntegrationEventContext.Default));
+        builder.AddRabbitMQ("eventbus");
+               //.AddSubscription<OrderStartedIntegrationEvent, OrderStartedIntegrationEventHandler>()
+               //.ConfigureJsonOptions(options => options.TypeInfoResolverChain.Add(IntegrationEventContext.Default));
     }
 }
 

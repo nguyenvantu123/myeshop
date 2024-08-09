@@ -14,6 +14,7 @@ using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Microsoft.SemanticKernel.TextGeneration;
 using eShop.WebApp.Services.OrderStatus.IntegrationEvents;
 using eShop.Basket.API.Grpc;
+using EventBusRabbitMQ;
 
 public static class Extensions
 {
@@ -21,8 +22,8 @@ public static class Extensions
     {
         builder.AddAuthenticationServices();
 
-        builder.AddRabbitMqEventBus("EventBus")
-               .AddEventBusSubscriptions();
+        builder.AddRabbitMQ("EventBus");
+               //.AddEventBusSubscriptions();
 
         builder.Services.AddHttpForwarderWithServiceDiscovery();
 

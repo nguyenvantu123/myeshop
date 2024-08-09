@@ -1,4 +1,5 @@
 ﻿using eShop.Catalog.API.Services;
+using EventBusRabbitMQ;
 using Microsoft.SemanticKernel;
 
 public static class Extensions
@@ -25,11 +26,11 @@ public static class Extensions
 
         builder.Services.AddTransient<IIntegrationEventLogService, IntegrationEventLogService<CatalogContext>>();
 
-        builder.Services.AddTransient<ICatalogIntegrationEventService, CatalogIntegrationEventService>();
+        //builder.Services.AddTransient<ICatalogIntegrationEventService, CatalogIntegrationEventService>();
 
-        builder.AddRabbitMqEventBus("eventbus")
-               .AddSubscription<OrderStatusChangedToAwaitingValidationIntegrationEvent, OrderStatusChangedToAwaitingValidationIntegrationEventHandler>()
-               .AddSubscription<OrderStatusChangedToPaidIntegrationEvent, OrderStatusChangedToPaidIntegrationEventHandler>();
+        builder.AddRabbitMQ("eventbus");
+               //.AddSubscription<OrderStatusChangedToAwaitingValidationIntegrationEvent, OrderStatusChangedToAwaitingValidationIntegrationEventHandler>()
+               //.AddSubscription<OrderStatusChangedToPaidIntegrationEvent, OrderStatusChangedToPaidIntegrationEventHandler>();
 
         builder.Services.AddOptions<CatalogOptions>()
             .BindConfiguration(nameof(CatalogOptions));

@@ -1,11 +1,13 @@
-﻿internal static class Extensions
+﻿using EventBusRabbitMQ;
+
+internal static class Extensions
 {
     public static void AddApplicationServices(this IHostApplicationBuilder builder)
     {
         builder.AddDefaultAuthentication();
 
-        builder.AddRabbitMqEventBus("eventbus")
-               .AddEventBusSubscriptions();
+        builder.AddRabbitMQ("eventbus");
+               //.AddEventBusSubscriptions();
 
         builder.AddSqlServerDbContext<WebhooksContext>("webhooksdb");
 

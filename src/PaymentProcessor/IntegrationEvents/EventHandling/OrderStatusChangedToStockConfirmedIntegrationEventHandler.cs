@@ -1,4 +1,7 @@
-﻿namespace eShop.PaymentProcessor.IntegrationEvents.EventHandling;
+﻿using eShop.EventBus.Abstractions;
+using eShop.EventBus.Events;
+
+namespace eShop.PaymentProcessor.IntegrationEvents.EventHandling;
 
 public class OrderStatusChangedToStockConfirmedIntegrationEventHandler(
     IEventBus eventBus,

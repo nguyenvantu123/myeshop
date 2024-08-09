@@ -1,4 +1,6 @@
-﻿internal static class Extensions
+﻿using EventBusRabbitMQ;
+
+internal static class Extensions
 {
     public static void AddApplicationServices(this IHostApplicationBuilder builder)
     {
@@ -26,8 +28,8 @@
 
         services.AddTransient<IOrderingIntegrationEventService, OrderingIntegrationEventService>();
 
-        builder.AddRabbitMqEventBus("eventbus")
-               .AddEventBusSubscriptions();
+        builder.AddRabbitMQ("eventbus");
+               //.AddEventBusSubscriptions();
 
         services.AddHttpContextAccessor();
         services.AddTransient<IIdentityService, IdentityService>();
