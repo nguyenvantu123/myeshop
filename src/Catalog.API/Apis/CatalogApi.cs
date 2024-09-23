@@ -10,25 +10,25 @@ public static class CatalogApi
         var api = app.MapGroup("api/catalog").HasApiVersion(1.0);
 
         // Routes for querying catalog items.
-        api.MapGet("/items", GetAllItems);
-        api.MapGet("/items/by", GetItemsByIds);
-        api.MapGet("/items/{id:int}", GetItemById);
-        api.MapGet("/items/by/{name:minlength(1)}", GetItemsByName);
-        api.MapGet("/items/{catalogItemId:int}/pic", GetItemPictureById);
+        //api.MapGet("/items", GetAllItems);
+        //api.MapGet("/items/by", GetItemsByIds);
+        //api.MapGet("/items/{id:int}", GetItemById);
+        //api.MapGet("/items/by/{name:minlength(1)}", GetItemsByName);
+        //api.MapGet("/items/{catalogItemId:int}/pic", GetItemPictureById);
 
-        // Routes for resolving catalog items using AI.
-        api.MapGet("/items/withsemanticrelevance/{text:minlength(1)}", GetItemsBySemanticRelevance);
+        //// Routes for resolving catalog items using AI.
+        //api.MapGet("/items/withsemanticrelevance/{text:minlength(1)}", GetItemsBySemanticRelevance);
 
-        // Routes for resolving catalog items by type and brand.
-        api.MapGet("/items/type/{typeId}/brand/{brandId?}", GetItemsByBrandAndTypeId);
-        api.MapGet("/items/type/all/brand/{brandId:int?}", GetItemsByBrandId);
-        api.MapGet("/catalogtypes", async (CatalogContext context) => await context.CatalogTypes.OrderBy(x => x.Type).ToListAsync());
-        api.MapGet("/catalogbrands", async (CatalogContext context) => await context.CatalogBrands.OrderBy(x => x.Brand).ToListAsync());
+        //// Routes for resolving catalog items by type and brand.
+        //api.MapGet("/items/type/{typeId}/brand/{brandId?}", GetItemsByBrandAndTypeId);
+        //api.MapGet("/items/type/all/brand/{brandId:int?}", GetItemsByBrandId);
+        //api.MapGet("/catalogtypes", async (CatalogContext context) => await context.CatalogTypes.OrderBy(x => x.Type).ToListAsync());
+        //api.MapGet("/catalogbrands", async (CatalogContext context) => await context.CatalogBrands.OrderBy(x => x.Brand).ToListAsync());
 
-        // Routes for modifying catalog items.
-        api.MapPut("/items", UpdateItem);
-        api.MapPost("/items", CreateItem);
-        api.MapDelete("/items/{id:int}", DeleteItemById);
+        //// Routes for modifying catalog items.
+        //api.MapPut("/items", UpdateItem);
+        //api.MapPost("/items", CreateItem);
+        //api.MapDelete("/items/{id:int}", DeleteItemById);
 
         return app;
     }
@@ -234,7 +234,7 @@ public static class CatalogApi
         catalogEntry.CurrentValues.SetValues(productToUpdate);
 
         //catalogItem.Embedding = await services.CatalogAI.GetEmbeddingAsync(catalogItem);
-
+        
         var priceEntry = catalogEntry.Property(i => i.Price);
 
         if (priceEntry.IsModified) // Save product's data and publish integration event through the Event Bus if price has changed
